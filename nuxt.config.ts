@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-icon',
     '@pinia/nuxt',
+    '@nuxtjs/google-fonts',
   ],
   ssr: true,
   runtimeConfig: {
@@ -23,6 +24,14 @@ export default defineNuxtConfig({
     sanityProjectId: process.env.SANITY_PROJECT_ID,
     sanityDataset: process.env.SANITY_DATASET,
     sanityApiVersion: process.env.SANITY_API_VERSION || '2026-01-19',
+  },
+  googleFonts: {
+    families: {
+      Nunito: [400, 700, 950], // Нужные веса
+    },
+    display: 'swap', // Текст виден сразу (важно для LCP)
+    download: true,  // Скачать локально (важно для скорости)
+    preconnect: true,
   },
   css: [
     "@/assets/styles/pages.scss",
@@ -42,11 +51,36 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-    meta: [
-      { name: 'theme-color', content: '#F97A19' },
-      { name: 'apple-mobile-web-app-status-bar-style', content: 'default' }
-    ],
-    viewport: 'width=device-width, initial-scale=1, viewport-fit=cover'
-  }
-  }
+      htmlAttrs: {
+        lang: 'en' 
+      },
+      meta: [
+        { name: 'theme-color', content: '#F97A19' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'default' }
+      ],
+      viewport: 'width=device-width, initial-scale=1, viewport-fit=cover'
+    }
+  },
+  experimental: {
+    inlineSSRStyles: true
+  },
+
+  render: {
+    // Это заставит Nuxt качать только то, что нужно здесь и сейчас
+    resourceHints: false 
+  },
+  hooks: {
+    'build:manifest': (manifest: any) => {
+      // Этот хак удаляет лишние предзагрузки из манифеста для Nuxt 3
+      for (const key in manifest) {
+        manifest[key].prefetch = false
+        manifest[key].preload = false
+      }
+    }
+  },
+
+  nitro: {
+    compressPublicAssets: true, // Сжимает картинки, стили и скрипты
+    minify: true,               // Дополнительно чистит код сервера
+  },
 } as any)

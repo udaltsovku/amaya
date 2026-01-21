@@ -48,10 +48,12 @@ const passwordC = computed({
 const loading = ref<boolean>(false)
 const success = ref<boolean>(false)
 
-const { data, pending, error } = await useFetch(`/api/${cms.value}/partners`, {
+const { data, pending, error } = useLazyFetch(`/api/${cms.value}/partners`, {
+  immediate: !isNaN(Number(id.value)),
   query: {
     id: id.value,
   },
+  server: true,
 })
 
 const err = ref(false);
@@ -216,9 +218,23 @@ onUnmounted(() => {
               <div class="page__logo-skeleton-spinner"></div>
             </div>
 
-            <template v-else-if="+id !== 0 && data?.logoUrl">
-              <img v-if="cms === 'contentful'" class="page__logo" :src="`${data?.logoUrl}?w=200&h=100&fit=fill&f=center`" alt="" />
-              <img v-else-if="cms === 'sanity'" class="page__logo" :src="`${data?.logoUrl}`" alt="" />
+            <template v-else-if="data?.logoUrl">
+              <img
+                v-if="cms === 'contentful'"
+                class="page__logo"
+                :src="`${data?.logoUrl}?w=200&h=100&fit=fill&f=center`"
+                alt=""
+                width="72"
+                height="72"
+              />
+              <img
+                v-else-if="cms === 'sanity'"
+                class="page__logo"
+                :src="`${data?.logoUrl}`"
+                alt=""
+                width="72"
+                height="72"
+              />
             </template>
 
             <div v-else class="page__logo page__logo--background"></div>
@@ -247,7 +263,30 @@ onUnmounted(() => {
           <div class="page__main-area" style="position: relative; width: 100%;">
             <transition name="card-transition" mode="out-in">
               <div v-if="step === 0" key="step0" class="page__step-wrapper">
-                <div class="page__hero"></div>
+                <picture v-if="step === 0" class="page__hero-picture">
+                  <source 
+                    media="(min-width: 768px)" 
+                    srcset="@/assets/images/hero-large.webp 1x, @/assets/images/hero-large@2x.webp 2x" 
+                    type="image/webp"
+                  >
+                  <source 
+                    media="(min-width: 390px)" 
+                    srcset="@/assets/images/hero-medium.webp 1x, @/assets/images/hero-medium@2x.webp 2x" 
+                    type="image/webp"
+                  >
+                  <source 
+                    srcset="@/assets/images/hero-small.webp 1x, @/assets/images/hero-small@2x.webp 2x" 
+                    type="image/webp"
+                  >
+                  <img 
+                    src="@/assets/images/hero-small.png" 
+                    alt="Hero" 
+                    class="page__hero-img"
+                    fetchpriority="high"
+                    width="200"
+                    height="200"
+                  >
+                </picture>
                 <button class="page__button" @click="nextStep" ontouchstart="">{{ $t('page_1_button') }}</button>
               </div>
 
@@ -284,7 +323,30 @@ onUnmounted(() => {
               </div>
 
               <div v-else-if="step === 2" key="step2" class="page__step-wrapper">
-                <div class="page__gift"></div>
+                <picture class="page__gift-picture">
+                  <source 
+                    media="(min-width: 768px)" 
+                    srcset="@/assets/images/gift-large.webp 1x, @/assets/images/gift-large@2x.webp 2x" 
+                    type="image/webp"
+                  >
+                  <source 
+                    media="(min-width: 390px)" 
+                    srcset="@/assets/images/gift-medium.webp 1x, @/assets/images/gift-medium@2x.webp 2x" 
+                    type="image/webp"
+                  >
+                  <source 
+                    srcset="@/assets/images/gift-small.webp 1x, @/assets/images/gift-small@2x.webp 2x" 
+                    type="image/webp"
+                  >
+                  <img 
+                    src="@/assets/images/gift-small.png" 
+                    alt="Gift" 
+                    class="page__gift-img"
+                    loading="lazy" 
+                    width="265"
+                    height="265"
+                  >
+                </picture>
                 <button class="page__button" @click="nextStep" ontouchstart="">{{ $t('page_3_button') }}</button>
               </div>
             </transition>
@@ -307,7 +369,6 @@ onUnmounted(() => {
         <transition name="icons-fade" mode="out-in">
           <PageIcons v-if="step === 0" />
         </transition>
-        <PageIcons v-if="step === 0" />
       </section>
     </div>
   </div>
@@ -422,6 +483,7 @@ onUnmounted(() => {
   }
 
   &__logo {
+    aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -597,12 +659,13 @@ onUnmounted(() => {
     }
   }
 
-  &__hero {
+  &__hero-picture {
+    aspect-ratio: 1 / 1;
     width: 200px;
     height: 200px;
     margin-bottom: 26px;
 
-    @include bg-image('hero', '@/assets/images', 'no-repeat center / contain');
+    // @include bg-image('hero', '@/assets/images', 'no-repeat center / contain');
 
     @media (min-width: 390px) and (max-width: 767px) {
       margin-bottom: 44px;
@@ -613,14 +676,30 @@ onUnmounted(() => {
       height: 300px;
       margin-bottom: 36px;
     }
+
+    img {
+      object-fit: contain;
+      width: 200px;
+      height: 200px;
+
+      @media (min-width: 390px) and (max-width: 767px) {
+        margin-bottom: 44px;
+      }
+
+      @media (min-width: 768px) {
+        width: 300px;
+        height: 300px;
+      }
+    }
   }
 
-  &__gift {
+  &__gift-picture {
+    aspect-ratio: 1 / 1;
     width: 265px;
     height: 265px;
     margin-bottom: 26px;
 
-    @include bg-image('gift', '@/assets/images', 'no-repeat center / contain');
+    // @include bg-image('gift', '@/assets/images', 'no-repeat center / contain');
 
     @media (min-width: 390px) and (max-width: 767px) {
       width: 300px;
@@ -632,6 +711,22 @@ onUnmounted(() => {
       width: 398px;
       height: 360px;
       margin-bottom: 36px;
+    }
+
+    img {
+      object-fit: contain;
+      width: 265px;
+      height: 265px;
+
+      @media (min-width: 390px) and (max-width: 767px) {
+        width: 300px;
+        height: 300px;
+      }
+
+      @media (min-width: 768px) {
+        width: 398px;
+        height: 360px;
+      }
     }
   }
 
