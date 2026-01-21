@@ -1,0 +1,314 @@
+@mixin slide-bg($name, $path: '@/assets/images/common') {
+  background: url('#{$path}/#{$name}-small.png') no-repeat top / contain;
+  background: image-set(
+    url('#{$path}/#{$name}-small.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}-small.png') type('image/png') 1x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 2x
+  ) no-repeat top / contain;
+
+  @media (min-width: 844px) and (max-width: 1023px) {
+    background: url('#{$path}/#{$name}-medium.png') no-repeat top / contain;
+    background: image-set(
+      url('#{$path}/#{$name}-medium.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-medium.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 2x
+    ) no-repeat top / contain;
+  }
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large.png') no-repeat top / contain;
+    background: image-set(
+      url('#{$path}/#{$name}-large.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) no-repeat top / contain;
+  }
+}
+
+@mixin slide-bg-no-small($name, $path: '@/assets/images/common') {
+  background: url('#{$path}/#{$name}-medium.png') no-repeat top / contain;
+  background: image-set(
+    url('#{$path}/#{$name}-medium.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}-medium.png') type('image/png') 1x,
+    url('#{$path}/#{$name}-medium@2x.png') type('image/png') 2x
+  ) no-repeat top / contain;
+
+  @media (min-width: 844px) and (max-width: 1023px) {
+    background: url('#{$path}/#{$name}-medium.png') no-repeat top / contain;
+    background: image-set(
+      url('#{$path}/#{$name}-medium.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-medium.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 2x
+    ) no-repeat top / contain;
+  }
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large.png') no-repeat top / contain;
+    background: image-set(
+      url('#{$path}/#{$name}-large.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) no-repeat top / contain;
+  }
+}
+
+@mixin slide-bg-no-medium($name, $path: '@/assets/images/common') {
+  background: url('#{$path}/#{$name}.png') no-repeat top / contain;
+  background: image-set(
+    url('#{$path}/#{$name}.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}.png') type('image/png') 1x,
+    url('#{$path}/#{$name}@2x.png') type('image/png') 2x
+  ) no-repeat top / contain;
+
+  @media (min-width: 844px) and (max-width: 1023px) {
+    background: url('#{$path}/#{$name}.png') no-repeat top / contain;
+    background: image-set(
+      url('#{$path}/#{$name}.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}.png') type('image/png') 1x,
+      url('#{$path}/#{$name}@2x.png') type('image/png') 2x
+    ) no-repeat top / contain;
+  }
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large.png') no-repeat top / contain;
+    background: image-set(
+      url('#{$path}/#{$name}-large.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) no-repeat top / contain;
+  }
+}
+
+@mixin bg-image($name, $path, $position-size: "no-repeat center / cover") {
+  background: url('#{$path}/#{$name}-small.png') #{$position-size};
+  background: image-set(
+    url('#{$path}/#{$name}-small.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}-small.png') type('image/png') 1x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 2x
+  ) #{$position-size};
+
+  @media (min-width: 844px) and (max-width: 1023px) {
+    background: url('#{$path}/#{$name}-medium.png') #{$position-size};
+    background: image-set(
+      url('#{$path}/#{$name}-medium.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-medium.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 2x
+    ) #{$position-size};
+  }
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large.png') #{$position-size};
+    background: image-set(
+      url('#{$path}/#{$name}-large.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) #{$position-size};
+  }
+}
+
+@mixin bg-image--vertical($name, $path, $position-size: "no-repeat center / cover") {
+  background: url('#{$path}/#{$name}-small.png') #{$position-size};
+  background: image-set(
+    url('#{$path}/#{$name}-small.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}-small.png') type('image/png') 1x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 2x
+  ) #{$position-size};
+
+  @media (min-width: 390px) and (max-width: 768px) {
+    background: url('#{$path}/#{$name}-medium.png') #{$position-size};
+    background: image-set(
+      url('#{$path}/#{$name}-medium.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-medium.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 2x
+    ) #{$position-size};
+  }
+
+  @media (min-width: 768px) {
+    background: url('#{$path}/#{$name}-large.png') #{$position-size};
+    background: image-set(
+      url('#{$path}/#{$name}-large.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) #{$position-size};
+  }
+}
+
+@mixin bg-image--no-medium($name, $path, $position-size: "no-repeat center / cover") {
+  background: url('#{$path}/#{$name}-small.png') #{$position-size};
+  background: image-set(
+    url('#{$path}/#{$name}-small.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}-small.png') type('image/png') 1x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 2x
+  ) #{$position-size};
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large.png') #{$position-size};
+    background: image-set(
+      url('#{$path}/#{$name}-large.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) #{$position-size};
+  }
+}
+
+@mixin bg-image-with-gradient(
+  $name,
+  $path,
+  $position-size: "no-repeat center / cover",
+  $gradient: none
+) {
+  background: url('#{$path}/#{$name}-small.png') #{$position-size}, #{$gradient};
+  background: image-set(
+    url('#{$path}/#{$name}-small.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}-small.png') type('image/png') 1x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 2x
+  ) #{$position-size}, #{$gradient};
+
+  @media (min-width: 844px) and (max-width: 1023px) {
+    background: url('#{$path}/#{$name}-medium.png') #{$position-size}, #{$gradient};
+    background: image-set(
+      url('#{$path}/#{$name}-medium.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-medium.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 2x
+    ) #{$position-size}, #{$gradient};
+  }
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large.png') #{$position-size}, #{$gradient};
+    background: image-set(
+      url('#{$path}/#{$name}-large.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) #{$position-size}, #{$gradient};
+  }
+}
+
+@mixin bg-image-with-gradient--only-2x(
+  $name,
+  $path,
+  $position-size: "no-repeat center / cover",
+  $gradient: none
+) {
+  background: url('#{$path}/#{$name}-small@2x.png') #{$position-size}, #{$gradient};
+  background: image-set(
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 1x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 2x
+  ) #{$position-size}, #{$gradient};
+
+  @media (min-width: 844px) and (max-width: 1023px) {
+    background: url('#{$path}/#{$name}-medium@2x.png') #{$position-size}, #{$gradient};
+    background: image-set(
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 2x
+    ) #{$position-size}, #{$gradient};
+  }
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large@2x.png') #{$position-size}, #{$gradient};
+    background: image-set(
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) #{$position-size}, #{$gradient};
+  }
+}
+
+@mixin bg-image--no-medium-slide(
+  $name,
+  $path, 
+  $position-size: 'no-repeat center / cover',
+  $background-position-y-small: 0,
+  $background-position-y-large: 0,
+) {
+  background: url('#{$path}/#{$name}.png') #{$position-size};
+  background: image-set(
+    url('#{$path}/#{$name}.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}.png') type('image/png') 1x,
+    url('#{$path}/#{$name}@2x.png') type('image/png') 2x
+  ) #{$position-size};
+  background-position-y: $background-position-y-small !important;
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large.png') #{$position-size};
+    background: image-set(
+      url('#{$path}/#{$name}-large.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) #{$position-size};
+    background-position-y: $background-position-y-large !important;
+  }
+}
+
+@mixin bg-image--only-one(
+  $name,
+  $path, 
+  $position-size: 'no-repeat center / cover',
+  $background-position-y-small: 0,
+  $background-position-y-large: 0,
+) {
+  background: url('#{$path}/#{$name}.png') #{$position-size};
+  background: image-set(
+    url('#{$path}/#{$name}.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}.png') type('image/png') 1x,
+    url('#{$path}/#{$name}@2x.png') type('image/png') 2x
+  ) #{$position-size};
+  background-position-y: $background-position-y-small !important;
+}
+
+@mixin bg-image--only-2x($name, $path, $position-size: "no-repeat center / cover") {
+  background: url('#{$path}/#{$name}-small@2x.png') #{$position-size};
+  background: image-set(
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 1x,
+    url('#{$path}/#{$name}-small@2x.webp') type('image/webp') 2x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 1x,
+    url('#{$path}/#{$name}-small@2x.png') type('image/png') 2x
+  ) #{$position-size};
+
+  @media (min-width: 844px) and (max-width: 1023px) {
+    background: url('#{$path}/#{$name}-medium@2x.png') #{$position-size};
+    background: image-set(
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-medium@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-medium@2x.png') type('image/png') 2x
+    ) #{$position-size};
+  }
+
+  @media (min-width: 1024px) {
+    background: url('#{$path}/#{$name}-large@2x.png') #{$position-size};
+    background: image-set(
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 1x,
+      url('#{$path}/#{$name}-large@2x.webp') type('image/webp') 2x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 1x,
+      url('#{$path}/#{$name}-large@2x.png') type('image/png') 2x
+    ) #{$position-size};
+  }
+}

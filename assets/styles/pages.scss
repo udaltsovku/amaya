@@ -1,0 +1,59 @@
+@import 'backgrounds';
+
+.page-actions{
+  border-radius: 6px;
+  display: inline-block;
+
+  .title{
+    font-size: 13px;
+    color: var(--el-text-color-regular);
+    margin-bottom: 6px;
+    margin-left: 0px;
+  }
+
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.sub-page-content{
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+
+  .info{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+  }
+
+  .info-side{
+    display: flex;
+    flex-direction: column;
+    width: 930px;
+  }
+
+  .title{
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+    gap: 5px;
+    margin-bottom: 20px;
+  }
+
+  .empty{
+    font-size: 14px;
+    color: gray;
+    cursor: default;
+  }
+
+  .table{
+    width: -webkit-fill-available;
+    max-width: 830px;
+  }
+}
