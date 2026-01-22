@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics';
+
 definePageMeta({
   layout: "default",
 });
@@ -90,6 +92,11 @@ const submit = async () => {
   } finally {
     loading.value = false
     step.value = step.value = 2;
+
+    track('Sign Up Completed', {
+      app: 'Diner',
+      partner: typeof id.value === 'number' ? String(id.value) : 'No partner',
+    });
   }
 }
 const router = useRouter();
@@ -112,13 +119,21 @@ const step = computed({
 
 function openAppStore() {
   window.open('https://apps.apple.com/app/id6447677737', '_blank', 'noopener,noreferrer');
-};
+  track('App Store Page Opened', {
+    app: 'Diner',
+    partner: typeof id.value === 'number' ? String(id.value) : 'No partner',
+  });
+}
 
 function nextStep() {
   if (loading.value) return; // Защита от кликов во время любых сетевых запросов
 
   if (step.value !== 2) {
     if (step.value === 0) {
+      track('Sign Up Started', {
+        app: 'Diner',
+        partner: typeof id.value === 'number' ? String(id.value) : 'No partner',
+      });
       step.value = 1;
     }
   } else {
@@ -129,6 +144,7 @@ function nextStep() {
 function prevStep() {
   step.value = step.value - 1;
 }
+
 useHead({
   meta: [
     {
