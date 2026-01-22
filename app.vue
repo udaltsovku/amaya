@@ -1,5 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { Analytics } from '@vercel/analytics/nuxt'
+import { SpeedInsights } from "@vercel/speed-insights/nuxt"
 
 const config = useRuntimeConfig();
 
@@ -87,6 +89,9 @@ onUnmounted(() => {
 
 <template>
   <div>
+    <Analytics />
+    <SpeedInsights />
+
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

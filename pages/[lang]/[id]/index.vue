@@ -92,8 +92,23 @@ const submit = async () => {
     step.value = step.value = 2;
   }
 }
+const router = useRouter();
 
-const step = ref(0);
+const step = computed({
+  get() {
+    const s = Number(route.query.step);
+    return isNaN(s) ? 0 : s;
+  },
+  set(newStep) {
+    // push добавляет шаг в историю браузера
+    router.push({
+      query: {
+        ...route.query,
+        step: newStep || undefined, // если 0, убираем из URL для чистоты
+      },
+    });
+  }
+});
 
 function openAppStore() {
   window.open('https://apps.apple.com/app/id6447677737', '_blank', 'noopener,noreferrer');
