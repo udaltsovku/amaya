@@ -3,15 +3,15 @@ import path from "node:path";
 import QRCode from "qrcode";
 import sharp from "sharp";
 
-const SVG_DIR = path.resolve("qr_out_svg_22");
-const PNG_DIR = path.resolve("qr_out_png_22");
+const SVG_DIR = path.resolve("qr_svg_new");
+const PNG_DIR = path.resolve("qr_png_new");
 
 // Создаем папки
 [SVG_DIR, PNG_DIR].forEach(dir => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
-const baseUrl = "https://qr-landing.amayakids.com";
+const baseUrl = "https://amayakids.vercel.app";
 const from = 1;
 const to = 100;
 

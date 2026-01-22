@@ -6,6 +6,21 @@ type PartnerResponse = {
   name: string | null
   logoUrl: string | null
   link: string | null
+  loc_website_title: string | null
+  loc_hero_title: string | null
+  loc_hero_button: string | null
+  loc_signup_title: string | null
+  loc_signup_card_title: string | null
+  loc_signup_card_email_label: string | null
+  loc_signup_card_email_placeholder: string | null
+  loc_signup_card_password_label: string | null
+  loc_signup_card_password_placeholder: string | null
+  loc_signup_card_button: string | null
+  loc_congrats_title: string | null
+  loc_congrats_button: string | null
+  loc_step_1: string | null
+  loc_step_2: string | null
+  loc_step_3: string | null
 }
 
 export default defineEventHandler(async (event: H3Event): Promise<PartnerResponse | null> => {
@@ -26,6 +41,21 @@ export default defineEventHandler(async (event: H3Event): Promise<PartnerRespons
       name: 'Fake Google',
       logoUrl: 'https://cdn.sanity.io/images/pyzqxu80/production/c3938db5ba213a8babed0fd7c45b6ba0245de7c5-2560x866.png?w=256&h=256&fit=max&crop=center&auto=format',
       link: 'https://google.com',
+      loc_website_title: '',
+      loc_hero_title: '',
+      loc_hero_button: '',
+      loc_signup_title: '',
+      loc_signup_card_title: '',
+      loc_signup_card_email_label: '',
+      loc_signup_card_email_placeholder: '',
+      loc_signup_card_password_label: '',
+      loc_signup_card_password_placeholder: '',
+      loc_signup_card_button: '',
+      loc_congrats_title: '',
+      loc_congrats_button: '',
+      loc_step_1: '',
+      loc_step_2: '',
+      loc_step_3: '',
     }
   }
 
@@ -50,7 +80,22 @@ export default defineEventHandler(async (event: H3Event): Promise<PartnerRespons
       id,
       name,
       "logoUrl": logo.asset->url,
-      link
+      link,
+      loc_website_title,
+      loc_hero_title,
+      loc_hero_button,
+      loc_signup_title,
+      loc_signup_card_title,
+      loc_signup_card_email_label,
+      loc_signup_card_email_placeholder,
+      loc_signup_card_password_label,
+      loc_signup_card_password_placeholder,
+      loc_signup_card_button,
+      loc_congrats_title,
+      loc_congrats_button,
+      loc_step_1,
+      loc_step_2,
+      loc_step_3,
     }
   `
 
@@ -63,6 +108,21 @@ export default defineEventHandler(async (event: H3Event): Promise<PartnerRespons
       name?: string
       logoUrl?: string
       link?: string
+      loc_website_title?: string
+      loc_hero_title?: string
+      loc_hero_button?: string
+      loc_signup_title?: string
+      loc_signup_card_title?: string
+      loc_signup_card_email_label?: string
+      loc_signup_card_email_placeholder?: string
+      loc_signup_card_password_label?: string
+      loc_signup_card_password_placeholder?: string
+      loc_signup_card_button?: string
+      loc_congrats_title?: string
+      loc_congrats_button?: string
+      loc_step_1?: string
+      loc_step_2?: string
+      loc_step_3?: string
     } | null
   }>(url, {
     headers: { Authorization: `Bearer ${sanityReadToken}` },
@@ -92,6 +152,21 @@ const croppedLogoUrl = (() => {
     name: doc.name ?? null,
     logoUrl: croppedLogoUrl,
     link: doc.link ?? null,
+    loc_website_title: doc.loc_website_title ?? null,
+    loc_hero_title: doc.loc_hero_title ?? null,
+    loc_hero_button: doc.loc_hero_button ?? null,
+    loc_signup_title: doc.loc_signup_title ?? null,
+    loc_signup_card_title: doc.loc_signup_card_title ?? null,
+    loc_signup_card_email_label: doc.loc_signup_card_email_label ?? null,
+    loc_signup_card_email_placeholder: doc.loc_signup_card_email_placeholder ?? null,
+    loc_signup_card_password_label: doc.loc_signup_card_password_label ?? null,
+    loc_signup_card_password_placeholder: doc.loc_signup_card_password_placeholder ?? null,
+    loc_signup_card_button: doc.loc_signup_card_button ?? null,
+    loc_congrats_title: doc.loc_congrats_title ?? null,
+    loc_congrats_button: doc.loc_congrats_button ?? null,
+    loc_step_1: doc.loc_step_1 ?? null,
+    loc_step_2: doc.loc_step_2 ?? null,
+    loc_step_3: doc.loc_step_3 ?? null,
   }
 
   if (fakeRequest) return mapped

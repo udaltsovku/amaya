@@ -259,9 +259,9 @@ onUnmounted(() => {
       
         <div class="page__content-inner">
           <transition name="slide-up-down-fast" mode="out-in">
-            <div v-if="step === 0" key="s0" class="page__title page__title--first" v-html="$t('page_1_title')"></div>
-            <div v-else-if="step === 1" key="s1" class="page__title page__title--secondary" v-html="$t('page_2_title')"></div>
-            <div v-else-if="step === 2" key="s2" class="page__title page__title--third" v-html="$t('page_3_title')"></div>
+            <div v-if="step === 0" key="s0" class="page__title page__title--first" v-html="data?.loc_hero_title ? data?.loc_hero_title : $t('page_1_title')"></div>
+            <div v-else-if="step === 1" key="s1" class="page__title page__title--secondary" v-html="data?.loc_signup_title ? data?.loc_signup_title : $t('page_2_title')"></div>
+            <div v-else-if="step === 2" key="s2" class="page__title page__title--third" v-html="data?.loc_congrats_title ? data?.loc_congrats_title : $t('page_3_title')"></div>
           </transition>
 
           <div class="page__main-area" style="position: relative; width: 100%;">
@@ -291,20 +291,20 @@ onUnmounted(() => {
                     height="200"
                   >
                 </picture>
-                <button class="page__button" @click="nextStep" ontouchstart="">{{ $t('page_1_button') }}</button>
+                <button class="page__button" @click="nextStep" ontouchstart="">{{ data?.loc_hero_button ? data?.loc_hero_button : $t('page_1_button') }}</button>
               </div>
 
               <div v-else-if="step === 1" key="step1" class="page__card-wrapper">
                 <div class="page__card">
-                  <div class="page__card-title">{{ $t('instructions_1') }}</div>
+                  <div class="page__card-title">{{ data?.loc_signup_card_title ? data?.loc_signup_card_title : $t('instructions_1') }}</div>
                   <div class="page__form">
                     <div class="page__input-group">
-                      <label class="page__label" for="email">{{ $t('page_2_username') }}</label>
-                      <input id="email" v-model="emailC" class="page__input" type="email" :placeholder="$t('page_2_username')" :disabled="loading" autocorrect="off" autocapitalize="none" spellcheck="false" />
+                      <label class="page__label" for="email">{{ data?.loc_signup_card_email_label ? data?.loc_signup_card_email_label : $t('page_2_username') }}</label>
+                      <input id="email" v-model="emailC" class="page__input" type="email" :placeholder="data?.loc_signup_card_email_placeholder ? data?.loc_signup_card_email_placeholder : $t('page_2_username')" :disabled="loading" autocorrect="off" autocapitalize="none" spellcheck="false" />
                     </div>
                     <div class="page__input-group">
-                      <label class="page__label" for="password">{{ $t('page_2_password') }}</label>
-                      <input id="password" v-model="passwordC" class="page__input" :type="passwordHidden ? 'password' : 'text'" :placeholder="$t('page_2_password')" :disabled="loading" />
+                      <label class="page__label" for="password">{{ data?.loc_signup_card_password_label ? data?.loc_signup_card_password_label : $t('page_2_password') }}</label>
+                      <input id="password" v-model="passwordC" class="page__input" :type="passwordHidden ? 'password' : 'text'" :placeholder="data?.loc_signup_card_password_placeholder ? data?.loc_signup_card_password_placeholder : $t('page_2_password')" :disabled="loading" />
                       <PageEye
                         class="page__input-eye"
                         :closed="passwordHidden"
@@ -315,7 +315,7 @@ onUnmounted(() => {
                     <div class="page__card-button-wrapper">
                       <button class="page__card-button" @click="submit" :disabled="loading || email.length === 0 || password.length === 0" ontouchstart="">
                         <span v-if="loading" class="page__card-button-spinner" aria-hidden="true"></span>
-                        <template v-else>{{ $t('page_2_button') }}</template>
+                        <template v-else>{{ data?.loc_signup_card_button ? data?.loc_signup_card_button : $t('page_2_button') }}</template>
                       </button>
 
                       <p v-if="err" class="page__message page__message--error">
@@ -352,7 +352,7 @@ onUnmounted(() => {
                     height="265"
                   >
                 </picture>
-                <button class="page__button" @click="nextStep" ontouchstart="">{{ $t('page_3_button') }}</button>
+                <button class="page__button" @click="nextStep" ontouchstart="">{{ data?.loc_congrats_button ? data?.loc_congrats_button : $t('page_3_button') }}</button>
               </div>
             </transition>
           </div>
@@ -365,7 +365,7 @@ onUnmounted(() => {
                 :class="['page__step', { 'page__step--active': step >= index + 1 }]"
               >
                 <div class="page__step-circle"></div>
-                <div class="page__step-title">{{ $t(item) }}</div>
+                <div class="page__step-title">{{ data?.[`loc_step_${index + 1}`] ? data?.[`loc_step_${index + 1}`] : $t(item) }}</div>
               </div>
             </div>
           </div>
