@@ -95,7 +95,7 @@ const submit = async () => {
 
     track('Sign Up Completed', {
       app: 'Diner',
-      partner: typeof id.value === 'number' ? String(id.value) : 'No partner',
+      partner: typeof id.value === 'string' ? String(id.value) : 'No partner',
     });
   }
 }
@@ -121,7 +121,7 @@ function openAppStore() {
   window.open('https://apps.apple.com/app/id6447677737', '_blank', 'noopener,noreferrer');
   track('App Store Page Opened', {
     app: 'Diner',
-    partner: typeof id.value === 'number' ? String(id.value) : 'No partner',
+    partner: typeof id.value === 'string' ? String(id.value) : 'No partner',
   });
 }
 
@@ -132,7 +132,7 @@ function nextStep() {
     if (step.value === 0) {
       track('Sign Up Started', {
         app: 'Diner',
-        partner: typeof id.value === 'number' ? String(id.value) : 'No partner',
+        partner: typeof id.value === 'string' ? String(id.value) : 'No partner',
       });
       step.value = 1;
     }
