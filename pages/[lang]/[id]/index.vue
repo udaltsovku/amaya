@@ -215,13 +215,41 @@ const updateOrientation = () => {
 };
 
 const passwordHidden = ref(true);
+const btnRef = ref<HTMLButtonElement | null>(null)
+const textRef = ref<HTMLSpanElement | null>(null)
+const fontSize = ref<number | null>(null)
+
+const adjustFontSize = async () => {
+  await nextTick()
+  if (!btnRef.value || !textRef.value) return
+
+  // 1. Сбрасываем кастомный размер, чтобы CSS медиа-запросы применили базу
+  fontSize.value = null
+  await nextTick()
+
+  // 2. Берем размер, который применил CSS (16, 20 или 34px)
+  let currentSize = parseFloat(window.getComputedStyle(textRef.value).fontSize)
+  const containerWidth = btnRef.value.clientWidth - 20; // -20 для отступов внутри
+
+  // 3. Уменьшаем, если текст шире кнопки
+  while (textRef.value.offsetWidth > containerWidth && currentSize > 8) {
+    currentSize -= 1
+    fontSize.value = currentSize
+    await nextTick() // Ждем перерисовки для точного замера
+  }
+}
 
 onMounted(() => {
+  adjustFontSize()
   updateOrientation();
   window.addEventListener('resize', updateOrientation);
   // На мобилках resize не всегда срабатывает при повороте
   window.addEventListener('orientationchange', updateOrientation);
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', adjustFontSize)
+})
 
 onUnmounted(() => {
   window.removeEventListener('resize', updateOrientation);
@@ -289,11 +317,13 @@ onUnmounted(() => {
         </transition>
       
         <div class="page__content-inner">
-          <transition name="slide-up-down-fast" mode="out-in">
-            <div v-if="step === 0" key="s0" class="page__title page__title--first" v-html="data?.loc_hero_title ? data?.loc_hero_title : $t('page_1_title')"></div>
-            <div v-else-if="step === 1" key="s1" class="page__title page__title--secondary" v-html="data?.loc_signup_title ? data?.loc_signup_title : $t('page_2_title')"></div>
-            <div v-else-if="step === 2" key="s2" class="page__title page__title--third" v-html="data?.loc_congrats_title ? data?.loc_congrats_title : $t('page_3_title')"></div>
-          </transition>
+          <ClientOnly>
+            <transition name="slide-up-down-fast" mode="out-in">
+              <div v-if="step === 0" key="s0" class="page__title page__title--first" v-html="data?.loc_hero_title ? data?.loc_hero_title : $t('page_1_title')"></div>
+              <div v-else-if="step === 1" key="s1" class="page__title page__title--secondary" v-html="data?.loc_signup_title ? data?.loc_signup_title : $t('page_2_title')"></div>
+              <div v-else-if="step === 2" key="s2" class="page__title page__title--third" v-html="data?.loc_congrats_title ? data?.loc_congrats_title : $t('page_3_title')"></div>
+            </transition>
+          </ClientOnly>
 
           <div class="page__main-area" style="position: relative; width: 100%;">
             <transition name="card-transition" mode="out-in">
@@ -322,7 +352,11 @@ onUnmounted(() => {
                     height="200"
                   >
                 </picture>
-                <button class="page__button" @click="nextStep" ontouchstart="">{{ data?.loc_hero_button ? data?.loc_hero_button : $t('page_1_button') }}</button>
+                <ClientOnly>
+                  <button class="page__button" @click="nextStep" ontouchstart="" v-fit-text>
+                    {{ data?.loc_hero_button ? data?.loc_hero_button : $t('page_1_button') }}
+                  </button>
+                </ClientOnly>
               </div>
 
               <div v-else-if="step === 1" key="step1" class="page__card-wrapper">
@@ -344,10 +378,12 @@ onUnmounted(() => {
                       />
                     </div>
                     <div class="page__card-button-wrapper">
-                      <button class="page__card-button" @click="submit" :disabled="loading || email.length === 0 || password.length === 0" ontouchstart="">
-                        <span v-if="loading" class="page__card-button-spinner" aria-hidden="true"></span>
-                        <template v-else>{{ data?.loc_signup_card_button ? data?.loc_signup_card_button : $t('page_2_button') }}</template>
-                      </button>
+                      <ClientOnly>
+                        <button class="page__card-button" @click="submit" :disabled="loading || email.length === 0 || password.length === 0" ontouchstart="" v-fit-text>
+                          <span v-if="loading" class="page__card-button-spinner" aria-hidden="true"></span>
+                          <template v-else>{{ data?.loc_signup_card_button ? data?.loc_signup_card_button : $t('page_2_button') }}</template>
+                        </button>
+                      </ClientOnly>
 
                       <p v-if="err" class="page__message page__message--error">
                         <template v-if="errorReason === 1">{{ $t('more_apps_account_sign_in_invalid_btn') }}</template>
@@ -383,7 +419,11 @@ onUnmounted(() => {
                     height="265"
                   >
                 </picture>
-                <button class="page__button" @click="nextStep" ontouchstart="">{{ data?.loc_congrats_button ? data?.loc_congrats_button : $t('page_3_button') }}</button>
+                <ClientOnly>
+                  <button class="page__button" @click="nextStep" ontouchstart=""  v-fit-text>
+                    {{ data?.loc_congrats_button ? data?.loc_congrats_button : $t('page_3_button') }}
+                  </button>
+                </ClientOnly>
               </div>
             </transition>
           </div>
@@ -667,30 +707,39 @@ onUnmounted(() => {
     line-height: 32px;
     font-weight: 950;
     text-align: center;
+    height: 64px;
+    max-width: 300px;
 
     @media (min-width: 390px) and (max-width: 767px) {
       font-size: 30px;
       line-height: 34px;
+      height: 68px;
+      max-width: 320px;
     }
 
     @media (min-width: 768px) {
       font-size: 42px;
       line-height: 48px;
+      height: 96px;
+      max-width: 448px;
     }
 
     &--third {
       font-size: 20px;
       line-height: 32px;
+      height: 64px;
 
       @media (min-width: 390px) and (max-width: 767px) {
         font-size: 23px;
         line-height: 32px;
+        height: 64px;
       }
 
       @media (min-width: 768px) {
-        white-space: nowrap;
+        // white-space: nowrap;
         font-size: 42px;
         line-height: 48px;
+        height: 96px;
       }
     }
   }
@@ -1103,7 +1152,7 @@ onUnmounted(() => {
   }
 
   &__steps {
-    position: fixed;
+    position: absolute;
     bottom: 12px;
     width: 300px;
     background-color: #f97a19;
