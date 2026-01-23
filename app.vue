@@ -73,8 +73,14 @@ watch(isLandscape, (newValue) => {
   }
 }, { immediate: true });
 
+const logicalHeight = ref(null);
+const logicalWidth = ref(null);
 
 onMounted(() => {
+  if (process.client) {
+    logicalWidth.value = window.innerWidth;
+    logicalHeight.value = window.innerHeight;
+  }
   updateOrientation();
   window.addEventListener('resize', updateOrientation);
   // На мобилках resize не всегда срабатывает при повороте
@@ -91,6 +97,7 @@ onUnmounted(() => {
   <div>
     <Analytics />
     <SpeedInsights />
+    <div class="degug">{{ logicalWidth }}x{{ logicalHeight }}</div>
 
     <NuxtLayout>
       <NuxtPage />
@@ -101,6 +108,13 @@ onUnmounted(() => {
 <style lang="scss">
 // @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
+.debug {
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  height: 32px;
+  font-size: 14px;
+}
 * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
