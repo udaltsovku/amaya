@@ -348,8 +348,8 @@ onUnmounted(() => {
                     alt="Hero" 
                     class="page__hero-img"
                     fetchpriority="high"
-                    width="200"
-                    height="200"
+                    width="175"
+                    height="175"
                   >
                 </picture>
                 <ClientOnly>
@@ -415,8 +415,8 @@ onUnmounted(() => {
                     alt="Gift" 
                     class="page__gift-img"
                     loading="lazy" 
-                    width="265"
-                    height="265"
+                    width="175"
+                    height="175"
                   >
                 </picture>
                 <ClientOnly>
@@ -661,7 +661,11 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 32px 98px 32px;
+    padding: 16px 16px 48px 16px;
+
+    @media (min-width: 376px) and (max-width: 390x) {
+      padding: 32px 32px 222px 32px;
+    }
 
     @media (min-width: 390px) and (max-width: 767px) {
       padding: 32px 32px 222px 32px;
@@ -707,51 +711,64 @@ onUnmounted(() => {
     line-height: 32px;
     font-weight: 950;
     text-align: center;
-    height: 64px;
-    max-width: 300px;
+    // height: 96px;
+    // max-width: 300px;
     z-index: 1;
+
+    @media (min-width: 376px) and (max-width: 390px) {
+      font-size: 24px;
+      line-height: 32px;
+      height: auto;
+      // max-width: 320px;
+    }
 
     @media (min-width: 390px) and (max-width: 767px) {
       font-size: 30px;
       line-height: 34px;
-      height: 68px;
-      max-width: 320px;
+      height: auto;
+      // max-width: 320px;
     }
 
     @media (min-width: 768px) {
       font-size: 42px;
       line-height: 48px;
-      height: 96px;
-      max-width: 448px;
+      height: auto;
+      // max-width: 448px;
     }
 
     &--third {
       font-size: 20px;
       line-height: 32px;
-      height: 64px;
+      height: 96px;
 
       @media (min-width: 390px) and (max-width: 767px) {
         font-size: 23px;
         line-height: 32px;
-        height: 64px;
+        height: 96px;
       }
 
       @media (min-width: 768px) {
         white-space: nowrap;
         font-size: 42px;
         line-height: 48px;
-        height: 96px;
+        height: 144px;
       }
     }
   }
 
   &__hero-picture {
     aspect-ratio: 1 / 1;
-    width: 200px;
-    height: 200px;
+    width: 175px;
+    height: 175px;
     margin-bottom: 26px;
 
     // @include bg-image('hero', '@/assets/images', 'no-repeat center / contain');
+
+    @media (min-width: 376px) and (max-width: 389px) {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 44px;
+    }
 
     @media (min-width: 390px) and (max-width: 767px) {
       margin-bottom: 44px;
@@ -765,8 +782,13 @@ onUnmounted(() => {
 
     img {
       object-fit: contain;
-      width: 200px;
-      height: 200px;
+      width: 175px;
+      height: 175px;
+
+      @media (min-width: 376px) and (max-width: 389px) {
+        width: 200px;
+        height: 200px;
+      }
 
       @media (min-width: 390px) and (max-width: 767px) {
         margin-bottom: 44px;
@@ -781,11 +803,18 @@ onUnmounted(() => {
 
   &__gift-picture {
     aspect-ratio: 1 / 1;
-    width: 265px;
-    height: 265px;
+    width: 175px;
+    height: 175px;
     margin-bottom: 26px;
 
-    // @include bg-image('gift', '@/assets/images', 'no-repeat center / contain');
+    // @include bg-image('hero', '@/assets/images', 'no-repeat center / contain');
+
+    @media (min-width: 376px) and (max-width: 389px) {
+      width: 265px;
+      height: 265px;
+      margin-bottom: 44px;
+    }
+
 
     @media (min-width: 390px) and (max-width: 767px) {
       width: 300px;
@@ -801,8 +830,13 @@ onUnmounted(() => {
 
     img {
       object-fit: contain;
-      width: 265px;
-      height: 265px;
+      width: 175px;
+      height: 175px;
+
+      @media (min-width: 376px) and (max-width: 389px) {
+        width: 265px;
+        height: 265px;
+      }
 
       @media (min-width: 390px) and (max-width: 767px) {
         width: 300px;
@@ -895,7 +929,10 @@ onUnmounted(() => {
 
     &-wrapper {
       width: 100%;
-      margin-top: 107px;
+
+      @media (min-width: 376px) and (max-width: 389px) {
+        margin-top: 107px;
+      }
 
       @media (min-width: 390px) and (max-width: 767px) {
         margin-top: 116px;
@@ -909,22 +946,29 @@ onUnmounted(() => {
     &::before {
       content: '';
       position: absolute;
-      top: -107px;
-      width: 120px;
-      height: 126px;
+      display: none;
       
       @include bg-image('raccoon', '@/assets/images', 'no-repeat center / contain');
+
+      @media (min-width: 376px) and (max-width: 389px) {
+        top: -107px;
+        width: 120px;
+        height: 126px;
+        display: block;
+      }
 
       @media (min-width: 390px) and (max-width: 767px) {
         top: -116px;
         width: 130px;
         height: 136px;
+        display: block;
       }
 
       @media (min-width: 768px) {
         top: -133px;
         width: 149px;
         height: 156px;
+        display: block;
       }
     }
 
@@ -1143,6 +1187,7 @@ onUnmounted(() => {
     top: 12px;
     width: 24px;
     height: 24px;
+    z-index: 10;
 
     @media (min-width: 768px) {
       left: 16px;

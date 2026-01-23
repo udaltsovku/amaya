@@ -36,9 +36,9 @@ const updateOrientation = () => {
     isLandscape.value = window.innerWidth > window.innerHeight;
     
     // Прячем клавиатуру, если она была открыта (часто ломает верстку при повороте)
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+    // if (document.activeElement instanceof HTMLElement) {
+    //   document.activeElement.blur();
+    // }
 
     // Принудительный скролл вверх для пересчета 100dvh/vh
     window.scrollTo(0, 0);
