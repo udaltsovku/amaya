@@ -709,6 +709,7 @@ onUnmounted(() => {
     text-align: center;
     height: 64px;
     max-width: 300px;
+    z-index: 1;
 
     @media (min-width: 390px) and (max-width: 767px) {
       font-size: 30px;
@@ -736,7 +737,7 @@ onUnmounted(() => {
       }
 
       @media (min-width: 768px) {
-        // white-space: nowrap;
+        white-space: nowrap;
         font-size: 42px;
         line-height: 48px;
         height: 96px;
@@ -1012,13 +1013,13 @@ onUnmounted(() => {
       @media (min-width: 390px) and (max-width: 767px) {
         font-size: 18px;
         line-height: 24px;
-        margin-bottom: 28px;
+        margin-bottom: 20px;
       }
 
       @media (min-width: 768px) {
         font-size: 24px;
         line-height: 32px;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
       }
     }
   }
@@ -1102,7 +1103,7 @@ onUnmounted(() => {
   &__label {
     display: block;
     padding: 0 24px;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     font-size: 14px;
     line-height: 18px;
     font-weight: 700;
@@ -1110,12 +1111,12 @@ onUnmounted(() => {
     @media (min-width: 390px) and (max-width: 767px) {
       margin-bottom: 12px;
       font-size: 14px;
-      line-height: 18px;
+      line-height: 8px;
     }
 
     @media (min-width: 768px) {
       padding: 0 28px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       font-size: 18px;
       line-height: 24px;
     }
@@ -1152,7 +1153,7 @@ onUnmounted(() => {
   }
 
   &__steps {
-    position: absolute;
+    position: fixed;
     bottom: 12px;
     width: 300px;
     background-color: #f97a19;

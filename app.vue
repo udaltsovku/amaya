@@ -62,10 +62,10 @@ watch(isLandscape, (newValue) => {
     } else {
       // PORTRAIT: фиксируем экран
       html.style.height = '100dvh';
-      // html.style.overflow = 'hidden';
+      html.style.overflow = 'hidden';
       
       body.style.height = '100dvh';
-      // body.style.overflow = 'hidden';
+      body.style.overflow = 'hidden';
       
       // Сбрасываем скролл вверх при возврате в портрет
       window.scrollTo(0, 0);
