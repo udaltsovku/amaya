@@ -97,7 +97,7 @@ onUnmounted(() => {
   <div>
     <Analytics />
     <SpeedInsights />
-    <div class="degug">{{ logicalWidth }}x{{ logicalHeight }}</div>
+    <!-- <div class="degug">{{ logicalWidth }}x{{ logicalHeight }}</div> -->
 
     <NuxtLayout>
       <NuxtPage />

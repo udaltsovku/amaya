@@ -661,11 +661,7 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 16px 16px 48px 16px;
-
-    @media (min-width: 376px) and (max-width: 390x) {
-      padding: 32px 32px 222px 32px;
-    }
+    padding: 32px 32px 222px 32px;
 
     @media (min-width: 390px) and (max-width: 767px) {
       padding: 32px 32px 222px 32px;
@@ -673,6 +669,10 @@ onUnmounted(() => {
 
     @media (min-width: 768px) {
       padding: 32px 32px 222px 32px;
+    }
+
+    @media (max-height: 667px) {
+      padding: 16px 16px 48px 16px;
     }
 
     &-inner {
@@ -715,13 +715,6 @@ onUnmounted(() => {
     // max-width: 300px;
     z-index: 1;
 
-    @media (min-width: 376px) and (max-width: 390px) {
-      font-size: 24px;
-      line-height: 32px;
-      height: auto;
-      // max-width: 320px;
-    }
-
     @media (min-width: 390px) and (max-width: 767px) {
       font-size: 30px;
       line-height: 34px;
@@ -734,6 +727,13 @@ onUnmounted(() => {
       line-height: 48px;
       height: auto;
       // max-width: 448px;
+    }
+
+    @media (max-height: 667px) {
+      font-size: 23px;
+      line-height: 29px;
+      height: auto;
+      // max-width: 320px;
     }
 
     &--third {
@@ -758,17 +758,11 @@ onUnmounted(() => {
 
   &__hero-picture {
     aspect-ratio: 1 / 1;
-    width: 175px;
-    height: 175px;
-    margin-bottom: 26px;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 44px;
 
     // @include bg-image('hero', '@/assets/images', 'no-repeat center / contain');
-
-    @media (min-width: 376px) and (max-width: 389px) {
-      width: 200px;
-      height: 200px;
-      margin-bottom: 44px;
-    }
 
     @media (min-width: 390px) and (max-width: 767px) {
       margin-bottom: 44px;
@@ -780,15 +774,16 @@ onUnmounted(() => {
       margin-bottom: 36px;
     }
 
-    img {
-      object-fit: contain;
+    @media (max-height: 667px) {
       width: 175px;
       height: 175px;
+      margin-bottom: 26px;
+    }
 
-      @media (min-width: 376px) and (max-width: 389px) {
-        width: 200px;
-        height: 200px;
-      }
+    img {
+      object-fit: contain;
+      width: 200px;
+      height: 200px;
 
       @media (min-width: 390px) and (max-width: 767px) {
         margin-bottom: 44px;
@@ -798,23 +793,21 @@ onUnmounted(() => {
         width: 300px;
         height: 300px;
       }
+
+      @media (max-height: 667px) {
+        width: 175px;
+        height: 175px;
+      }
     }
   }
 
   &__gift-picture {
     aspect-ratio: 1 / 1;
-    width: 175px;
-    height: 175px;
-    margin-bottom: 26px;
+    width: 265px;
+    height: 265px;
+    margin-bottom: 44px;
 
     // @include bg-image('hero', '@/assets/images', 'no-repeat center / contain');
-
-    @media (min-width: 376px) and (max-width: 389px) {
-      width: 265px;
-      height: 265px;
-      margin-bottom: 44px;
-    }
-
 
     @media (min-width: 390px) and (max-width: 767px) {
       width: 300px;
@@ -828,15 +821,16 @@ onUnmounted(() => {
       margin-bottom: 36px;
     }
 
-    img {
-      object-fit: contain;
+    @media (max-height: 667px) {
       width: 175px;
       height: 175px;
+      margin-bottom: 26px;
+    }
 
-      @media (min-width: 376px) and (max-width: 389px) {
-        width: 265px;
-        height: 265px;
-      }
+    img {
+      width: 265px;
+      height: 265px;
+      object-fit: contain;
 
       @media (min-width: 390px) and (max-width: 767px) {
         width: 300px;
@@ -846,6 +840,11 @@ onUnmounted(() => {
       @media (min-width: 768px) {
         width: 398px;
         height: 360px;
+      }
+
+      @media (max-height: 667px) {
+        width: 175px;
+        height: 175px;
       }
     }
   }
@@ -929,10 +928,7 @@ onUnmounted(() => {
 
     &-wrapper {
       width: 100%;
-
-      @media (min-width: 376px) and (max-width: 389px) {
-        margin-top: 107px;
-      }
+      margin-top: 107px;
 
       @media (min-width: 390px) and (max-width: 767px) {
         margin-top: 116px;
@@ -941,21 +937,21 @@ onUnmounted(() => {
       @media (min-width: 768px) {
         margin-top: 133px;
       }
+
+      @media (max-height: 667px) {
+        margin-top: 0;
+      }
     }
 
     &::before {
       content: '';
       position: absolute;
-      display: none;
+      top: -107px;
+      width: 120px;
+      height: 126px;
+      display: block;
       
       @include bg-image('raccoon', '@/assets/images', 'no-repeat center / contain');
-
-      @media (min-width: 376px) and (max-width: 389px) {
-        top: -107px;
-        width: 120px;
-        height: 126px;
-        display: block;
-      }
 
       @media (min-width: 390px) and (max-width: 767px) {
         top: -116px;
@@ -969,6 +965,10 @@ onUnmounted(() => {
         width: 149px;
         height: 156px;
         display: block;
+      }
+
+      @media (max-height: 667px) {
+        display: none;
       }
     }
 
