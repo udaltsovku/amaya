@@ -26,6 +26,7 @@ const urlData = computed<{ id: number; app: string } | null>(() => {
   }
 })
 const id = computed(() => route.params.id);
+const lang = computed(() => route.params.lang);
 const app = computed(() => urlData.value?.app ?? null)
 
 
@@ -51,9 +52,9 @@ const loading = ref<boolean>(false)
 const success = ref<boolean>(false)
 
 const { data, pending, error } = useLazyFetch(`/api/${cms.value}/partners`, {
-  immediate: !isNaN(Number(id.value ? id.value : 102)),
+  immediate: !isNaN(Number(id.value ? id.value : (lang.value && /^\d+$/.test(String(lang.value)) ? lang.value : 102))),
   query: {
-    id: id.value ? id.value : 102,
+    id: id.value ? id.value : (lang.value && /^\d+$/.test(String(lang.value)) ? lang.value : 102),
   },
   server: true,
 })
